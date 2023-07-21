@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/product/list}"><button>back</button></a>
+<h1>Detail Product</h1>
+    <table th:object="${product}">
+        <tr>
+            <th>Name</th>
+            <td><input  type="text" th:field="*{name}" ></td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td><input type="number" th:field="*{price}" ></td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td><input type="number" th:field="*{quantity}" ></td>
+        </tr>
+        <tr>
+            <th>Producer</th>
+            <td><input type="text" th:field="*{producer}" ></td>
+        </tr>
+    </table>
+</body>
+</html>
