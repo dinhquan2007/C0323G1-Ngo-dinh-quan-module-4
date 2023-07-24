@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class ProductController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable int id,Model model){
         model.addAttribute("product",productService.findById(id));
-    return "edit";
+       return "edit";
     }
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable int id,Model model){
@@ -42,16 +43,30 @@ public class ProductController {
     }
 
     @GetMapping("/create")
-    public String showFormCreate(Model model){
-        model.addAttribute("product",new Product());
+    public String showFormCreate(Model model) {
+        model.addAttribute("product", new Product());
         return "create";
     }
+
     @GetMapping("/delete/{id}")
-    public String remove(Product product,Model model){
-        productService.remove(product);
-        return "redirect:list";
+    public String showDeleteForm(@PathVariable int id, Model model) {
+        Product product=productService.findById(id);
+        model.addAttribute("product", product);
+        return "delete";
     }
 
+    @PostMapping("/delete")
+    public String remove(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        productService.remove(productService.findById(id));
+        redirectAttributes.addAttribute("message", "delete success");
+        return "redirect:list";
+    }
+    @GetMapping("/search")
+    public String findWithName(@RequestParam("searchName") String searchName ,RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("productList",productService.findByName(searchName));
+        redirectAttributes.addFlashAttribute("searchName",searchName);
+        return "redirect:list";
+    }
     @PostMapping("/create")
     public String save(Product product, RedirectAttributes redirectAttributes){
     productService.save(product);

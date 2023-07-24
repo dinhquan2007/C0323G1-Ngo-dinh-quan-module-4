@@ -2,58 +2,59 @@ package com.codegym.repository;
 
 import com.codegym.model.Product;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class ProductRepository implements IProductRepository{
-    private static final List<Product> productList=new ArrayList<>();
-    static {
-        productList.add(new Product(1,"Chocolate",20,20000,"Orion"));
-        productList.add(new Product(2,"egg",200,2000,"Orion"));
-        productList.add(new Product(3,"Banh trung",20,30000,"Orion"));
-        productList.add(new Product(4,"banh gao",20,20000,"Orion"));
-        productList.add(new Product(5,"nice",20,20000,"Orion"));
-    }
+public class ProductRepository implements IProductRepository {
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public List<Product> getAll() {
-
-        return productList;
+        TypedQuery<Product> query = entityManager.createQuery("from Product", Product.class);
+        return query.getResultList();
     }
 
     @Override
+    @Transactional
     public void save(Product product) {
-    productList.add(product);
+       entityManager.persist(product);
     }
 
     @Override
     public Product findById(int id) {
-        for (Product p:productList) {
-            if (p.getId()==id){
-                return p;
-            }
-        }
-        return null;
+        Product product = entityManager.find(Product.class, id);
+        return product;
     }
 
     @Override
+    @Transactional
     public void remove(Product product) {
-    productList.remove(product);
+        Product product1 = findById(product.getId());
+        entityManager.remove(product1);
     }
 
     @Override
+    @Transactional
     public List<Product> findByName(String name) {
-        return null;
+        TypedQuery<Product> query = entityManager.createQuery("from Product p where p.name like :name", Product.class);
+        query.setParameter("name", "%"+name+"%");
+        return query.getResultList();
     }
 
     @Override
+    @Transactional
     public void update(Product product) {
-        for (int i = 0; i < productList.size(); i++) {
-            if(product.getId()==productList.get(i).getId()){
-                productList.set(i, product);
-                return;
-            }
-        }
+        Product product1 = findById(product.getId());
+        product1.setName(product.getName());
+        product1.setPrice(product.getPrice());
+        product1.setQuantity(product.getQuantity());
+        product1.setProducer(product.getProducer());
+        entityManager.close();
     }
 }

@@ -18,8 +18,17 @@
 </head>
 <body>
 <h1>Product List</h1>
-<a th:href="@{/product/create}"><button style="background: darkslategray;color: white">Add Product</button></a>
+<a th:href="@{/product/create}">
+    <button style="background: darkslategray;color: white">Add Product</button>
+</a>
 <p style="color: green" th:if="${message!=null}" th:text="${message}"></p>
+<form th:action="@{search}" th:method="get">
+    <label>
+        <input type="text" th:name="searchName">
+        <button type="submit">Search</button>
+    </label>
+</form>
+
 <table>
     <tr>
         <th>#</th>
@@ -36,9 +45,15 @@
         <td th:text="${product.price}"></td>
         <td th:text="${product.quantity}"></td>
         <td th:text="${product.producer}"></td>
-        <td><a th:href="@{/product/detail/{id}(id=${product.id})}"><button style="background: darkcyan;color: white">Detail</button></a></td>
-        <td><a th:href="@{/product/update/{id}(id=${product.id})}"><button style="background: darkgoldenrod;color:white">update</button></a></td>
-        <td><a th:href="@{/product/delete/{id}(id=${product.id})}"><button style="background: brown;color: white">Delete</button></a></td>
+        <td><a th:href="@{/product/detail/{id}(id=${product.id})}">
+            <button style="background: darkcyan;color: white">Detail</button>
+        </a></td>
+        <td><a th:href="@{/product/update/{id}(id=${product.id})}">
+            <button style="background: darkgoldenrod;color:white">update</button>
+        </a></td>
+        <td><a th:href="@{/product/delete/{id}(id=${product.id})}" th:value="delete">
+            <button style="background: brown;color: white">Delete</button>
+        </a></td>
     </tr>
 </table>
 </body>
