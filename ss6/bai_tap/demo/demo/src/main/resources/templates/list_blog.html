@@ -15,7 +15,7 @@
 <a th:href="@{/blog/create}">
     <button style="background: darkslategray;color: white">Add Product</button>
 </a>
-<p style="color: green" th:if="${message!=null}" th:text="${message}"></p>
+<p style="color: green" th:if="${message!=null}" th:text="${message}" ></p>
 <form action="/blog/list" th:method="get">
     <label>
         <input type="text" th:name="searchName" th:value="${searchName}">

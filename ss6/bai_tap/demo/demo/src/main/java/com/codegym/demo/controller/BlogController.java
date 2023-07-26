@@ -65,24 +65,22 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("message", "save success");
         return "redirect:/blog/list";
     }
-
     @GetMapping("/edit/{id}")
     String showFormEdit(@PathVariable int id, Model model) {
         Blog blog = blogService.findById(id);
         model.addAttribute("blog", blog);
         return "update_blog";
     }
-
     @GetMapping("/delete/{id}")
     String delete(@PathVariable int id, RedirectAttributes redirectAttributes) {
         Blog blog = blogService.findById(id);
         blogService.delete(blog);
-        redirectAttributes.addAttribute("message", "delete success!!!!!!!!!");
-        return "redirect:list_blog";
+        redirectAttributes.addFlashAttribute("message", "delete success!!!!!!!!!");
+        return "redirect:/blog/list";
     }
 
     @PostMapping("/edit")
-    String updateBlog(Blog blog, RedirectAttributes redirectAttributes) {
+    String updateBlog( Blog blog, RedirectAttributes redirectAttributes ) {
         blogService.save(blog);
         redirectAttributes.addFlashAttribute("message", "save success");
         return "redirect:/blog/list";

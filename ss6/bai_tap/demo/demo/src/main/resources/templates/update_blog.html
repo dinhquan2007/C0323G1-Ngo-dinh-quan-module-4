@@ -7,19 +7,23 @@
 <body>
 <h1>Update Blog</h1>
 <a href="/blog/list">back home</a>
-<form action="/blog/edit" th:method="post">
-    <table th:object="${blog}">
+<form action="/blog/edit" th:method="post" th:object="${blog}">
+    <input hidden="hidden" th:field="*{id}">
+    <table >
         <tr>
             <th>Name</th>
             <th>Url</th>
             <th>Category</th>
         </tr>
-        <tr>
+        <tr >
             <td>
                 <input th:field="*{name}" th:value="${blog.name}">
             </td>
             <td>
                 <input th:field="*{url}" th:value="${blog.url}">
+            </td>
+             <td>
+                <input th:field="*{timePost}" th:value="${blog.timePost}">
             </td>
             <td>
                 <select th:field="*{category}">
