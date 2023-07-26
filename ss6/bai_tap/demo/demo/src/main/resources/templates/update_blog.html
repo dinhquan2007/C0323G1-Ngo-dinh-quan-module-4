@@ -13,6 +13,7 @@
         <tr>
             <th>Name</th>
             <th>Url</th>
+            <th>Time post</th>
             <th>Category</th>
         </tr>
         <tr >
@@ -22,8 +23,10 @@
             <td>
                 <input th:field="*{url}" th:value="${blog.url}">
             </td>
-             <td>
-                <input th:field="*{timePost}" th:value="${blog.timePost}">
+            <td>
+                <span   th:value="${blog.timePost}" th:text="${blog.timePost}">
+                </span>
+                <input hidden="hidden" th:field="*{timePost}" th:value="3">
             </td>
             <td>
                 <select th:field="*{category}">

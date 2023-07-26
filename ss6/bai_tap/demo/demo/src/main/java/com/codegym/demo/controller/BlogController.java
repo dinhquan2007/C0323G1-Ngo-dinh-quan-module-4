@@ -34,7 +34,7 @@ public class BlogController {
     @GetMapping("/list")
     ModelAndView getAll(@RequestParam(defaultValue = "0") int page,
                         @RequestParam(defaultValue = "") String searchName) {
-        Pageable pageable = PageRequest.of(page, 3, Sort.by("name").ascending().and(Sort.by("category").descending()));
+        Pageable pageable = PageRequest.of(page, 3, Sort.by("timePost").descending());
         Page<Blog> blogPage = blogService.getAll(pageable, searchName);
         ModelAndView modelAndView = new ModelAndView("list_blog");
         modelAndView.addObject("blogPage", blogPage);
