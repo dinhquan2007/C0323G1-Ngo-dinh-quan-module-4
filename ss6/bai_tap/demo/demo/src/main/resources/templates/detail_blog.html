@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, tr, td, th {
+            border: 1px solid crimson;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Detail Blog</h1>
+<table th:object="${blog}">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>Category</th>
+    </tr>
+    <tr>
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.name}"></td>
+        <td th:text="${blog.url}"></td>
+        <td th:text="${blog.timePost}"></td>
+        <td th:text="${blog.category.name}"></td>
+    </tr>
+
+</table>
+</body>
+</html>

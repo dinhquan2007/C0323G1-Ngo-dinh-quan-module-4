@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, tr, td, th {
+            border: 1px solid crimson;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Blog List</h1>
+<a th:href="@{/blog/create}">
+    <button style="background: darkslategray;color: white">Add Product</button>
+</a>
+<p style="color: green" th:if="${message!=null}" th:text="${message}"></p>
+<form action="/blog/list" th:method="get">
+    <label>
+        <input type="text" th:name="searchName" th:value="${searchName}">
+        <button type="submit">Search</button>
+    </label>
+</form>
+
+<table style="border: 1px solid crimson">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>Time post</th>
+        <th>Category</th>
+        <th>Detail</th>
+        <th colspan="2">Edit</th>
+    </tr>
+    <tr th:each="blog,status:${blogPage}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${blog.name}"></td>
+        <td th:text="${blog.url}"></td>
+        <td th:text="${blog.timePost}"></td>
+        <td th:text="${blog.category.name}"></td>
+        <td><a th:href="@{/blog/detail/{id}(id=${blog.id})}">
+            <button style="background: darkcyan;color: white">Detail</button>
+        </a></td>
+        <td><a th:href="@{/blog/edit/{id}(id=${blog.id})}">
+            <button style="background: darkgoldenrod;color:white">update</button>
+        </a></td>
+        <td><a th:href="@{/blog/delete/{id}(id=${blog.id})}" th:value="delete">
+            <button style="background: brown;color: white">Delete</button>
+        </a></td>
+    </tr>
+</table>
+<a th:if="${blogPage.hasPrevious()}"
+   th:href="@{/blog/list(page=${(blogPage.number)-1},searchName=${searchName})}">Prev</a>
+<span th:text="${blogPage.number+1}"></span>/<span th:text="${blogPage.totalPages}"></span>
+<a th:if="${blogPage.hasNext()}" th:href="@{/blog/list(page=${blogPage.number+1},searchName=${searchName})}">Next</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/blog/list}">
+    <button>back</button>
+</a>
+<h1>Add Blog</h1>
+<form th:object="${blog}" th:action="@{/blog/create}" th:method="post">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td><input type="text" th:field="*{name}" required></td>
+        </tr>
+        <tr>
+            <th>Url</th>
+            <td><input type="text" th:field="*{url}" required></td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>
+                <select th:field="*{category}">
+                    <option th:each="c:${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <button type="submit" style="background: green;color: white">Save Product</button>
+            </th>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
