@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap520/css/bootstrap.css}">
+    <script th:src="@{/bootstrap520/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<h1>Add new Song</h1>
+<a href="/song/list">back</a>
+<form th:action="@{/song/create}" th:object="${songDto}" th:method="post">
+    <table class="table-danger">
+        <tr>
+            <th>Name</th>
+            <td>
+                <input type="text" th:field="*{name}">
+            </td>
+            <td><small style="color: crimson" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small></td>
+        </tr>
+        <tr>
+            <th>Singer</th>
+            <td>
+                <input type="text" th:field="*{singer}">
+            </td>
+            <td><small style="color: crimson" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}"></small></td>
+        </tr>
+        <tr>
+            <th>Genre</th>
+            <td>
+                <input type="text" th:field="*{genre}">
+            </td>
+            <td><small style="color: crimson" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></small></td>
+        </tr>
+        <tr>
+            <th colspan="2"><button class="btn btn-outline-danger" type="submit">Save</button></th>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap520/css/bootstrap.css}">
+    <script th:src="@{/bootstrap520/js/bootstrap.bundle.js}"></script>
+
+</head>
+<body>
+<h1>Song List</h1>
+<a th:href="@{/song/create}">
+    <button class="btn btn-primary">
+        Add new song
+    </button>
+</a>
+<table class="table" th:object="${songList}">
+    <tr>
+        <th>
+         Name
+        </th>
+        <th>
+         Singer
+        </th>
+        <th>
+            Genre
+        </th>
+        <th>
+            Update
+        </th>
+    </tr>
+    <tr th:each="s:${songList}">
+        <td th:text="${s.name}"></td>
+        <td th:text="${s.singer}"></td>
+        <td th:text="${s.genre}"></td>
+        <td><a th:href="@{/song/update/{id}(id=${s.id})}">
+            <button class="btn btn-outline-danger">Update</button></a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
