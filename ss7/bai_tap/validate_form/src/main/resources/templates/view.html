@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${userDto}" th:action="@{/user/}" method="post">
+    <fieldset class="align-left">
+        <legend style="text-align: center"><h1>Đăng ký</h1></legend>
+        <table style="text-align: left">
+            <tr>
+                <th>Firstname</th>
+                <td>
+                    <input th:field="*{firstname}" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><small style="color: crimson" th:if="${#fields.hasErrors('firstname')}"
+                           th:errors="*{firstname}"></small></td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>
+                    <input th:field="*{lastname}" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><small style="color: crimson" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></small></td>
+            </tr>
+            <tr>
+                <th>Phone number</th>
+                <td>
+                    <input th:field="*{phoneNumber}" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th> </th>
+                <td><small style="color: crimson" th:if="${#fields.hasErrors('phoneNumber')}"
+                       th:errors="*{phoneNumber}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>
+                    <input th:field="*{age}" type="number">
+                </td>
+            </tr>
+            <tr>
+                <th> </th>
+                <td>
+                    <small style="color: crimson" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input th:field="*{email}" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th> </th>
+                <td>
+                    <small style="color: crimson" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                </td>
+            </tr>
+            <tr>
+                <th> </th>
+                <th>
+                    <button>Sign Up</button>
+                </th>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>
