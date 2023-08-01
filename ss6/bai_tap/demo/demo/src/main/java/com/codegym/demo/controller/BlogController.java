@@ -48,14 +48,12 @@ public class BlogController {
         model.addAttribute(blog);
         return "detail_blog";
     }
-
     @GetMapping("/create")
     String showCreateForm(Model model) {
         Blog blog = new Blog();
         model.addAttribute("blog", blog);
         return "create_blog";
     }
-
     @PostMapping("/create")
     String createBlog(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes) {
         LocalDate date;
@@ -78,7 +76,6 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("message", "delete success!!!!!!!!!");
         return "redirect:/blog/list";
     }
-
     @PostMapping("/edit")
     String updateBlog( Blog blog, RedirectAttributes redirectAttributes ) {
         blogService.save(blog);
