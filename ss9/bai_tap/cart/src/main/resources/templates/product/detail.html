@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="card mb-3">
+        <div>
+            <div>
+                <img th:src="@{${product.image}}">
+            </div>
+            <div>
+                <div>
+                    <h5 th:text="${product.name}"></h5>
+                    <p th:text="${product.description}"></p>
+                    <strong th:text="${product.price}"></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
