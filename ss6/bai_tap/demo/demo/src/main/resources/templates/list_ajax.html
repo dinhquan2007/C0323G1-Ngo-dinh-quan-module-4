@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="code.jquery.com_jquery-3.7.0.min.js"></script>
+
+</head>
+<body>
+<h1>Blog management</h1>
+<button id="search" type="button">Search</button>
+<input type="text" name="searchName" id="searchName">
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Url</th>
+        <th>Time post</th>
+        <th>Category</th>
+        <!--    <th>Detail</th>-->
+        <!--    <th colspan="2">Edit</th>-->
+    </tr>
+    <tbody id="content">
+    </tbody>
+</table>
+<button type="button" onclick="showMore()">show more</button>
+
+<script>
+    let newPage = 0;
+    let searchName = $('#searchName').val();
+    display(newPage, searchName);
+
+    function display(newPage, searchName) {
+        let page = 0;
+        if (newPage > 0) {
+            page = newPage;
+        }
+        let content = "";
+        $.ajax({
+            contentType: "application/json",
+            method: "GET",
+            dataType: "json",
+            url: "http://localhost:8080/api/blog/list?searchName=" + searchName + "&page=" + page,
+            success: function (data) {
+                let blog = data.content;
+                for (let i = 0; i < blog.length; i++) {
+                    content += `<tr>
+                      <td>${i + 1}</td>
+                      <td>${blog[i].name}</td>
+                      <td>${blog[i].url}</td>
+                      <td>${blog[i].timePost}</td>
+                      <td>${blog[i].category.name}</td>
+                    </tr>`
+                }
+                $("#content").append(content);
+            }
+        })
+    }
+
+    function showMore() {
+        newPage += 1;
+        display(newPage, searchName);
+    }
+</script>
+</body>
+</html>
