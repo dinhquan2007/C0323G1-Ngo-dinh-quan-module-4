@@ -24,4 +24,14 @@ public class PlayerSoccerService implements IPlayerSoccerService{
     public void remove(PlayerSoccer playerSoccer) {
         playerSoccerRepository.remove(playerSoccer);
     }
+
+    @Override
+    public boolean update(PlayerSoccer playerSoccer, int id) {
+        return playerSoccerRepository.update(playerSoccer,id);
+    }
+
+    @Override
+    public void save(PlayerSoccer playerSoccer) {
+        playerSoccerRepository.save(playerSoccer);
+    }
 }

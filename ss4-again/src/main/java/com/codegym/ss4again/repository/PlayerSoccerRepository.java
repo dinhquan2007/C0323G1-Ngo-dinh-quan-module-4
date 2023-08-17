@@ -37,4 +37,20 @@ public class PlayerSoccerRepository implements IPlayerSoccerRepository {
     public void remove(PlayerSoccer playerSoccer) {
         soccerList.remove(playerSoccer);
     }
+
+    @Override
+    public boolean update(PlayerSoccer playerSoccer, int id) {
+        for (int i = 0; i < soccerList.size(); i++) {
+            if (soccerList.get(i).getId()==id){
+                soccerList.set(i,playerSoccer);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void save(PlayerSoccer playerSoccer) {
+        soccerList.add(playerSoccer);
+    }
 }

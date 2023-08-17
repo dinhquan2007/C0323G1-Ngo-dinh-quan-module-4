@@ -34,7 +34,6 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
-
         return "loginPage";
     }
 
@@ -75,7 +74,6 @@ public class MainController {
             model.addAttribute("message", message);
 
         }
-
         return "403Page";
     }
 

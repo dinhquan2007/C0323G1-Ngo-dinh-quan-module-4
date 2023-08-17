@@ -16,7 +16,6 @@ public class UserDto {
     public UserDto() {
     }
 
-
     public UserDto(String firstname, String lastname, String phoneNumber, int age, String email) {
         this.firstname = firstname;
         this.lastname = lastname;

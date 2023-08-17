@@ -82,5 +82,9 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("message", "save success");
         return "redirect:/blog/list";
     }
+    @GetMapping("/test")
+    String showTest() {
+        return "/test";
+    }
 
 }

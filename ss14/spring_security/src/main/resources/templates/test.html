@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Left Sidebar Navigation - Expandable</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .navbar {
+      height: 50px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #f8f9fa;
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+    .content {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+    .sidebar-toggle {
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      width: 30px;
+      height: 30px;
+      background-color: #f8f9fa;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar">
+  <!-- Thanh navbar -->
+</div>
+<div class="container">
+  <div class="sidebar">
+    <ul>
+      <li><a href="#">Trang chủ</a></li>
+      <li><a href="#">Danh mục 1</a></li>
+      <li><a href="#">Danh mục 2</a></li>
+      <li><a href="#">Danh mục 3</a></li>
+    </ul>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+  </div>
+  <div class="content">
+    <!-- Nội dung chính của trang web -->
+    <button onclick="toggleSidebar()">Mở rộng</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script>
+  function toggleSidebar() {
+    var sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('open');
+
+    var sidebarToggle = document.querySelector('.sidebar-toggle');
+    sidebarToggle.classList.toggle('open');
+
+    var icon = sidebarToggle.querySelector('i');
+    if (sidebar.classList.contains('open')) {
+      icon.classList.remove('fa-chevron-left');
+      icon.classList.add('fa-chevron-right');
+    } else {
+      icon.classList.remove('fa-chevron-right');
+      icon.classList.add('fa-chevron-left');
+    }
+  }
+</script>
+</body>
+</html>

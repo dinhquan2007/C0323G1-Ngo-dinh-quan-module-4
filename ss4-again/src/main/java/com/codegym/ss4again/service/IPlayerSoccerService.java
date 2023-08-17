@@ -9,4 +9,8 @@ public interface IPlayerSoccerService {
     PlayerSoccer findById(int id);
 
     void remove(PlayerSoccer playerSoccer);
+
+    boolean update(PlayerSoccer playerSoccer, int id);
+
+    void save(PlayerSoccer playerSoccer);
 }
