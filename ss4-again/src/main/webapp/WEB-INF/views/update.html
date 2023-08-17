@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="../bootstrap/bootstrap-5.0.2-dist/css/bootstrap.css">
+  <script src="../bootstrap/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+<h1>Chỉnh sửa thông tin</h1>
+<table th:object="${playerSoccer}" class="table table-hover">
+  <tr>
+    <th>Mã Cầu Thủ</th>
+    <td>
+      <input class="color-input-field" type="text" th:field="*{code}">
+    </td>
+  </tr>
+  <tr>
+    <th>Tên Cầu Thủ</th>
+    <td>
+      <input class="color-input-field" type="text" th:field="*{name}">
+    </td>
+  </tr>
+  <tr>
+    <th>Ngày Sinh</th>
+    <td>
+      <input class="color-input-field" type="date" th:field="*{birth}">
+    </td>
+  </tr>
+  <tr>
+    <th>Kinh Nghiệm</th>
+    <td>
+      <input class="color-input-field" type="text" th:field="*{experience}">
+    </td>
+  </tr>
+  <tr>
+    <th>Vị trí</th>
+    <td>
+      <input class="color-input-field" type="text" th:field="*{position}">
+    </td>
+  </tr>
+  <tr>
+    <th rowspan="2">Ảnh</th>
+    <td>
+      <img style="height: 200px;width: 200px" th:src="${playerSoccer.getImage()}" alt="ảnh thẻ">
+    </td>
+  </tr>
+  <tr>
+    <td><input class="color-input-field"  type="text" th:field="*{image}"></td>
+  </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</table>
+</body>
+</html>
