@@ -1,12 +1,25 @@
 package com.codegym.ss4again.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "player_soccer")
 public class PlayerSoccer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "player_id")
     private int id;
+    @Column(name = "player_code")
     private String code;
+    @Column(name = "player_name")
     private String name;
+    @Column(name = "player_birth")
     private String birth;
+    @Column(name = "player_exp")
     private String experience;
+    @Column(name = "player_position")
     private String position;
+    @Column(name = "player_path_img")
     private String image;
 
     public PlayerSoccer() {

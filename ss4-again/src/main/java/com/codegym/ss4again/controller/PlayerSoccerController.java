@@ -34,7 +34,7 @@ public class PlayerSoccerController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute PlayerSoccer playerSoccer,RedirectAttributes redirectAttributes) {
+    public String create(@ModelAttribute PlayerSoccer playerSoccer  ,RedirectAttributes redirectAttributes) {
         playerSoccerService.save(playerSoccer);
         redirectAttributes.addFlashAttribute("meg","thêm mới thành công");
         return "redirect:/soccer/list";

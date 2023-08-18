@@ -2,55 +2,54 @@ package com.codegym.ss4again.repository;
 
 import com.codegym.ss4again.model.PlayerSoccer;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
 public class PlayerSoccerRepository implements IPlayerSoccerRepository {
-    private static List<PlayerSoccer> soccerList = new ArrayList<>();
-
-    static {
-        soccerList.add(new PlayerSoccer(1, "ps-001", "Chanh TV", "01-01-1987", "2 year", "trung ve", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYWhI7TCv3XhwY1rcvjB7B_sFrAYUvLKQMgPJIaGO-qlIx2pSa"));
-        soccerList.add(new PlayerSoccer(2, "ps-002", "Chanh TV", "01-01-1987", "2 year", "trung ve", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYWhI7TCv3XhwY1rcvjB7B_sFrAYUvLKQMgPJIaGO-qlIx2pSa"));
-        soccerList.add(new PlayerSoccer(3, "ps-003", "Chanh TV", "01-01-1987", "2 year", "trung ve", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYWhI7TCv3XhwY1rcvjB7B_sFrAYUvLKQMgPJIaGO-qlIx2pSa"));
-        soccerList.add(new PlayerSoccer(4, "ps-004", "Chanh TV", "01-01-1987", "2 year", "trung ve", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYWhI7TCv3XhwY1rcvjB7B_sFrAYUvLKQMgPJIaGO-qlIx2pSa"));
-        soccerList.add(new PlayerSoccer(5, "ps-005", "Chanh TV", "01-01-1987", "2 year", "trung ve", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYWhI7TCv3XhwY1rcvjB7B_sFrAYUvLKQMgPJIaGO-qlIx2pSa"));
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<PlayerSoccer> getAll() {
-        return soccerList;
+        TypedQuery<PlayerSoccer> query=entityManager.createQuery("from PlayerSoccer ",PlayerSoccer.class);
+        return query.getResultList();
     }
 
     @Override
     public PlayerSoccer findById(int id) {
-        for (PlayerSoccer playerSoccer : soccerList) {
-            if (playerSoccer.getId() == id) {
-                return playerSoccer;
-            }
-        }
-        return null;
+        PlayerSoccer playerSoccer=entityManager.find(PlayerSoccer.class,id);
+        return playerSoccer;
     }
-
+    @Transactional
     @Override
     public void remove(PlayerSoccer playerSoccer) {
-        soccerList.remove(playerSoccer);
+        PlayerSoccer playerSoccer1=findById(playerSoccer.getId());
+        entityManager.remove(playerSoccer1);
     }
-
+    @Transactional
     @Override
     public boolean update(PlayerSoccer playerSoccer, int id) {
-        for (int i = 0; i < soccerList.size(); i++) {
-            if (soccerList.get(i).getId()==id){
-                soccerList.set(i,playerSoccer);
-                return true;
-            }
+        PlayerSoccer playerSoccer1=findById(id);
+        if (playerSoccer1!=null){
+            playerSoccer1.setCode(playerSoccer.getCode());
+            playerSoccer1.setName(playerSoccer.getName());
+            playerSoccer1.setBirth(playerSoccer.getBirth());
+            playerSoccer1.setExperience(playerSoccer.getExperience());
+            playerSoccer1.setPosition(playerSoccer.getPosition());
+            playerSoccer1.setImage(playerSoccer.getImage());
+            entityManager.merge(playerSoccer1);
+            return true;
         }
         return false;
     }
-
+    @Transactional
     @Override
     public void save(PlayerSoccer playerSoccer) {
-        soccerList.add(playerSoccer);
+        entityManager.persist(playerSoccer);
     }
 }
