@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Thêm mới cầu thủ</h1>
+<form th:action="@{/soccer/create}" method="post">
+  <table th:object="${playerSoccer}" class="table table-hover">
+    <tr>
+      <th>Id</th>
+      <td>
+        <input class="color-input-field" type="text" th:field="*{id}">
+      </td>
+    </tr>
+    <tr>
+      <th>Mã Cầu Thủ</th>
+      <td>
+        <input class="color-input-field" type="text" th:field="*{code}">
+      </td>
+    </tr>
+    <tr>
+      <th>Tên Cầu Thủ</th>
+      <td>
+        <input class="color-input-field" type="text" th:field="*{name}">
+      </td>
+    </tr>
+    <tr>
+      <th>Ngày Sinh</th>
+      <td>
+        <input class="color-input-field" type="date" th:field="*{birth}">
+      </td>
+    </tr>
+    <tr>
+      <th>Kinh Nghiệm</th>
+      <td>
+        <input class="color-input-field" type="text" th:field="*{experience}">
+      </td>
+    </tr>
+    <tr>
+      <th>Vị trí</th>
+      <td>
+        <input class="color-input-field" type="text" th:field="*{position}">
+      </td>
+    </tr>
+    <tr>
+      <th>Link Ảnh</th>
+      <td>
+      <input class="color-input-field"  type="text" th:field="*{image}">
+      </td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-primary">Thêm mới</button>
+</form>
+</body>
+</html>
