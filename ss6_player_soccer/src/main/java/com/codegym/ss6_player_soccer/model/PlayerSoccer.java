@@ -1,6 +1,9 @@
 package com.codegym.ss6_player_soccer.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "player_soccer")
@@ -14,18 +17,21 @@ public class PlayerSoccer {
     @Column(name = "player_name")
     private String name;
     @Column(name = "player_birth")
-    private String birth;
+    private Date birth;
     @Column(name = "player_exp")
     private String experience;
     @Column(name = "player_position")
     private String position;
     @Column(name = "player_path_img")
     private String image;
+    @ManyToOne
+    @JoinColumn(name = "team_id",referencedColumnName = "id")
+    private Team team;
 
     public PlayerSoccer() {
     }
 
-    public PlayerSoccer(int id, String code, String name, String birth, String experience, String position, String image) {
+    public PlayerSoccer(int id, String code, String name, Date birth, String experience, String position, String image, Team team) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -33,6 +39,7 @@ public class PlayerSoccer {
         this.experience = experience;
         this.position = position;
         this.image = image;
+        this.team = team;
     }
 
     public int getId() {
@@ -59,11 +66,11 @@ public class PlayerSoccer {
         this.name = name;
     }
 
-    public String getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(String birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
 
@@ -89,5 +96,13 @@ public class PlayerSoccer {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

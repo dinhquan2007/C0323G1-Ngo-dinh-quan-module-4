@@ -9,14 +9,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 @Service
 public class PlayerSoccerService implements IPlayerSoccerService{
     @Autowired
     private IPlayerSoccerRepository playerSoccerRepository;
     @Override
-    public Page<PlayerSoccer> getAll(Pageable pageable,String name) {
-        return playerSoccerRepository.findAllByNameContaining(pageable,name);
+    public Page<PlayerSoccer> getAll(Pageable pageable, String name, Date dateStart, Date dateEnd) {
+        return playerSoccerRepository.findAllByNameContaining(pageable,'%'+name+'%',dateStart,dateEnd);
     }
 
     @Override

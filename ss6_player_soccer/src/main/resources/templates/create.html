@@ -47,11 +47,20 @@
       </td>
     </tr>
     <tr>
+      <th>Đội tuyển</th>
+      <td>
+        <select th:field="*{team}" name="team" id="team">
+                <option th:each="t:${team}" th:value="${t.id}" th:text="${t.name}"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
       <th>Link Ảnh</th>
       <td>
       <input class="color-input-field"  type="text" th:field="*{image}">
       </td>
     </tr>
+
   </table>
   <button type="submit" class="btn btn-primary">Thêm mới</button>
 </form>

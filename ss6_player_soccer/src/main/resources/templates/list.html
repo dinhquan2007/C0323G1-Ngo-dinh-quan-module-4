@@ -22,6 +22,8 @@
         <form action="/soccer/list" method="get">
             <input type="text"  placeholder="Nhập tên" th:value="${searchName}" name="searchName">
             <input type="text" placeholder="Số lượng trong trang" th:value="${size}" name="size">
+            <input type="date" name="dateStart" th:value="${dateStart}">
+            <input type="date" name="dateEnd" th:value="${dateEnd}">
             <button class="btn btn-primary">Tìm kiếm</button>
         </form>
     </div>
@@ -46,6 +48,7 @@
         <td th:text="${s.getName()}"></td>
         <td th:text="${s.getBirth()}"></td>
         <td th:text="${s.getExperience()}"></td>
+        <td th:text="${s.getTeam().getName()}"></td>
         <td th:text="${s.getPosition()}"></td>
         <td>
             <img style="height: 200px;width: 200px" th:src="${s.getImage()}" alt="ảnh thẻ">
@@ -69,14 +72,14 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li th:class="${!soccerPage.hasPrevious()}?'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/soccer/list(page=${(soccerPage.number)-1},searchName=${searchName},size=${size})}">Trước</a>
+                <a class="page-link" th:href="@{/soccer/list(page=${(soccerPage.number)-1},searchName=${searchName},size=${size},dateStart=${dateStart},dateEnd=${dateEnd})}">Trước</a>
             </li>
             <li class="page-link disabled">
                 <span th:text="${soccerPage.number +1}"></span>/<span
                     th:text="${soccerPage.totalPages}"></span>
             </li>
             <li th:class="${!soccerPage.hasNext()}?'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/soccer/list(page=${(soccerPage.number)+1},searchName=${searchName},size=${size})}">Sau</a>
+                <a class="page-link" th:href="@{/soccer/list(page=${(soccerPage.number)+1},searchName=${searchName},size=${size},dateStart=${dateStart},dateEnd=${dateEnd})}">Sau</a>
             </li>
         </ul>
     </nav>

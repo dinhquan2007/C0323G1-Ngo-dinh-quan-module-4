@@ -17,6 +17,7 @@
     <th>Tên Cầu Thủ</th>
     <th>Ngày Sinh</th>
     <th>Kinh Nghiệm</th>
+    <th>Đội tuyển</th>
     <th>Vị trí</th>
     <th>Ảnh</th>
   </tr>
@@ -25,6 +26,7 @@
     <td th:text="${playerSoccer.getName()}"></td>
     <td th:text="${playerSoccer.getBirth()}"></td>
     <td th:text="${playerSoccer.getExperience()}"></td>
+    <td th:text="${playerSoccer.getTeam().getName()}"></td>
     <td th:text="${playerSoccer.getPosition()}"></td>
     <td>
       <img style="height: 200px;width: 200px" th:src="${playerSoccer.getImage()}" alt="ảnh thẻ">
