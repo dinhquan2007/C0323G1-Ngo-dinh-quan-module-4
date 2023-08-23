@@ -1,18 +1,17 @@
-package com.codegym.ss6_player_soccer.service;
+package com.codegym.ss6_player_soccer.service.play_soccer;
 
 import com.codegym.ss6_player_soccer.model.PlayerSoccer;
-import com.codegym.ss6_player_soccer.repository.IPlayerSoccerRepository;
-import com.codegym.ss6_player_soccer.model.PlayerSoccer;
-import com.codegym.ss6_player_soccer.repository.IPlayerSoccerRepository;
+import com.codegym.ss6_player_soccer.repository.play_soccer.IPlayerSoccerRepository;
+import com.codegym.ss6_player_soccer.service.play_soccer.IPlayerSoccerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.List;
+
 @Service
-public class PlayerSoccerService implements IPlayerSoccerService{
+public class PlayerSoccerService implements IPlayerSoccerService {
     @Autowired
     private IPlayerSoccerRepository playerSoccerRepository;
     @Override

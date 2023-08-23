@@ -1,4 +1,4 @@
-package com.codegym.ss6_player_soccer.service;
+package com.codegym.ss6_player_soccer.service.play_soccer;
 
 
 

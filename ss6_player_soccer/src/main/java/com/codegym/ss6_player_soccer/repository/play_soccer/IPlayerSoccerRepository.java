@@ -1,4 +1,4 @@
-package com.codegym.ss6_player_soccer.repository;
+package com.codegym.ss6_player_soccer.repository.play_soccer;
 
 import com.codegym.ss6_player_soccer.model.PlayerSoccer;
 import org.springframework.data.domain.Page;

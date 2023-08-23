@@ -1,4 +1,4 @@
-package com.codegym.ss6_player_soccer.repository;
+package com.codegym.ss6_player_soccer.repository.team;
 
 import com.codegym.ss6_player_soccer.model.Team;
 import org.springframework.data.jpa.repository.JpaRepository;

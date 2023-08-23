@@ -38,6 +38,7 @@
         <th>Ngày Sinh</th>
         <th>Kinh Nghiệm</th>
         <th>Vị trí</th>
+        <th>Đội tuyển</th>
         <th>Ảnh</th>
         <th>Chi tiết</th>
         <th colspan="2">Chức năng</th>
@@ -49,7 +50,7 @@
         <td th:text="${s.getBirth()}"></td>
         <td th:text="${s.getExperience()}"></td>
         <td th:text="${s.getTeam().getName()}"></td>
-        <td th:text="${s.getPosition()}"></td>
+        <td th:text="${s.getPosition().getName()}"></td>
         <td>
             <img style="height: 200px;width: 200px" th:src="${s.getImage()}" alt="ảnh thẻ">
         </td>

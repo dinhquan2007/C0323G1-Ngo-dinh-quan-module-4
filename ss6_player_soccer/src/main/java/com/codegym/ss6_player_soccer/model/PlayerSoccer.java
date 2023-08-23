@@ -19,9 +19,10 @@ public class PlayerSoccer {
     @Column(name = "player_birth")
     private Date birth;
     @Column(name = "player_exp")
-    private String experience;
-    @Column(name = "player_position")
-    private String position;
+    private int experience;
+    @ManyToOne
+    @JoinColumn(name = "position_id",referencedColumnName = "id")
+    private Position position;
     @Column(name = "player_path_img")
     private String image;
     @ManyToOne
@@ -31,7 +32,7 @@ public class PlayerSoccer {
     public PlayerSoccer() {
     }
 
-    public PlayerSoccer(int id, String code, String name, Date birth, String experience, String position, String image, Team team) {
+    public PlayerSoccer(int id, String code, String name, Date birth, int experience, Position position, String image, Team team) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -74,19 +75,19 @@ public class PlayerSoccer {
         this.birth = birth;
     }
 
-    public String getExperience() {
+    public int getExperience() {
         return experience;
     }
 
-    public void setExperience(String experience) {
+    public void setExperience(int experience) {
         this.experience = experience;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

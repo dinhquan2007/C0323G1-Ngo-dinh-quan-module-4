@@ -10,8 +10,8 @@
 </head>
 <body>
 <h1>Chỉnh sửa thông tin</h1>
-<form th:action="@{/soccer/update/__${playerSoccer.id}__}" th:method="post">
-<table th:object="${playerSoccer}" class="table table-hover">
+<form th:action="@{/soccer/update/__${playerSoccerDto.id}__}" th:method="post">
+<table th:object="${playerSoccerDto}" class="table table-hover">
 
       <input class="color-input-field" type="text" hidden="hidden" name="id" th:field="*{id}">
    <tr>
@@ -35,33 +35,35 @@
   <tr>
     <th>Kinh Nghiệm</th>
     <td>
-      <input class="color-input-field" type="text" th:field="*{experience}">
+      <input class="color-input-field" type="number" th:field="*{experience}">
     </td>
   </tr>
   <tr>
     <th>Đội tuyển</th>
     <td>
       <select th:field="*{team}" name="team" id="team">
-        <option th:each="t:${team}" th:value="${t.id}" th:text="${t.name}"></option>
+        <option th:each="t:${teams}" th:value="${t.id}" th:text="${t.name}"></option>
       </select>
   </tr>
   <tr>
     <th>Vị trí</th>
     <td>
-      <input class="color-input-field" type="text" th:field="*{position}">
+      <select class="color-input-field" th:field="*{position}">
+        <option th:each="p:${positions}" th:value="${p.getId()}" th:text="${p.name}"></option>
+      </select>
     </td>
   </tr>
   <tr>
     <th rowspan="2">Ảnh</th>
     <td>
-      <img style="height: 200px;width: 200px" th:src="${playerSoccer.getImage()}" alt="ảnh thẻ">
+      <img style="height: 200px;width: 200px" th:src="${playerSoccerDto.getImage()}" alt="ảnh thẻ">
     </td>
   </tr>
   <tr>
     <td><input class="color-input-field"  type="text" th:field="*{image}"></td>
   </tr>
 </table>
-  <button type="submit">Xác nhận</button>
+  <button type="submit" class="btn btn-primary">Xác nhận</button>
 </form>
 </body>
 </html>
