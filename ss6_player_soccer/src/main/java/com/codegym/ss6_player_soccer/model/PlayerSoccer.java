@@ -20,6 +20,8 @@ public class PlayerSoccer {
     private Date birth;
     @Column(name = "player_exp")
     private int experience;
+    @Column(name = "player_status")
+    private boolean status;
     @ManyToOne
     @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Position position;
@@ -32,12 +34,13 @@ public class PlayerSoccer {
     public PlayerSoccer() {
     }
 
-    public PlayerSoccer(int id, String code, String name, Date birth, int experience, Position position, String image, Team team) {
+    public PlayerSoccer(int id, String code, String name, Date birth, int experience, boolean status, Position position, String image, Team team) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.birth = birth;
         this.experience = experience;
+        this.status = status;
         this.position = position;
         this.image = image;
         this.team = team;
@@ -77,6 +80,14 @@ public class PlayerSoccer {
 
     public int getExperience() {
         return experience;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public void setExperience(int experience) {

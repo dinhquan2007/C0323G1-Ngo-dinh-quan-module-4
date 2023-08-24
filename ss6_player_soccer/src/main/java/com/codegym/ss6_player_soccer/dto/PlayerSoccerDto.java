@@ -17,6 +17,7 @@ public class PlayerSoccerDto implements Validator {
     private String name;
     private Date birth;
     private int experience;
+    private boolean status;
     private Position position;
     private Team team;
     private String image;

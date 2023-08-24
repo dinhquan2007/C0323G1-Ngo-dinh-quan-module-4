@@ -125,4 +125,19 @@ public class PlayerSoccerController {
         return "redirect:/soccer/list";
     }
 
+    @GetMapping("/ready")
+    public String transitionStatusReady(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        PlayerSoccer playerSoccer = playerSoccerService.findById(id);
+        playerSoccer.setStatus(true);
+        return "redirect:/soccer/list";
+    }
+
+    @GetMapping("/un-ready")
+    public String transitionStatusReserve(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        PlayerSoccer playerSoccer=playerSoccerService.findById(id);
+        playerSoccer.setStatus(false);
+        return "redirect:/soccer/list";
+    }
+
+
 }

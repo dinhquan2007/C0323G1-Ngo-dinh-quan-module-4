@@ -41,7 +41,7 @@
         <th>Đội tuyển</th>
         <th>Ảnh</th>
         <th>Chi tiết</th>
-        <th colspan="2">Chức năng</th>
+        <th colspan="3">Chức năng</th>
     </tr>
     <tr th:each="s,status:${soccerPage}">
         <td th:text="${status.count}"></td>
@@ -60,6 +60,14 @@
         </td>
         <td><a th:href="@{/soccer/update/__${s.getId()}__}">
             <button class="btn btn-primary" type="button"> Sửa</button>
+        </a>
+        </td>
+        <td th:if="${s.status}"><a th:href="@{/soccer/un-ready(id=${s.getId()})}">
+            <button class="btn btn-warring" type="button"> Dự Bị</button>
+        </a>
+        </td>
+        <td th:if="${!s.status}"><a th:href="@{/soccer/ready(id=${s.getId()})}">
+            <button class="btn btn-success" type="button"> Ra Sân</button>
         </a>
         </td>
         <td>
