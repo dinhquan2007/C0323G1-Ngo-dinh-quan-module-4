@@ -1,5 +1,6 @@
 package com.codegym.ss6_player_soccer.controller;
 
+import com.codegym.ss6_player_soccer.dto.LikeDto;
 import com.codegym.ss6_player_soccer.dto.PlayerSoccerDto;
 import com.codegym.ss6_player_soccer.model.PlayerSoccer;
 import com.codegym.ss6_player_soccer.model.Position;
@@ -27,6 +28,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/soccer")
+@SessionAttributes("like")
 public class PlayerSoccerController {
     @Autowired
     private IPlayerSoccerService playerSoccerService;
@@ -34,32 +36,44 @@ public class PlayerSoccerController {
     private ITeamService teamService;
     @Autowired
     private IPositionService positionService;
+
+    @ModelAttribute("like")
+    public LikeDto showListLike() {
+        return new LikeDto();
+    }
+
     @ModelAttribute("teams")
-    public List<Team> showTeams(){
+    public List<Team> showTeams() {
         return teamService.getAll();
     }
+
     @ModelAttribute("positions")
-    public List<Position> showPosition(){
+    public List<Position> showPosition() {
         return positionService.getAll();
     }
+
     @GetMapping("/list")
     public String getAll(@RequestParam(defaultValue = "0") int page,
+                         @SessionAttribute(value = "like", required = false) LikeDto likeDto,
                          @RequestParam(defaultValue = "") String searchName,
                          @RequestParam(defaultValue = "3") int size,
-                         @RequestParam(defaultValue = "1945-01-01",required = false) Date dateStart,
+                         @RequestParam(defaultValue = "1945-01-01", required = false) Date dateStart,
                          @RequestParam(required = false) Date dateEnd,
                          Model model) {
         if (dateEnd==null){
-            dateEnd=Date.valueOf(LocalDate.now());
+            dateEnd = Date.valueOf(LocalDate.now());
         }
-        Pageable pageable= PageRequest.of(page,size,Sort.by("player_name").ascending().and(Sort.by("player_birth").ascending()));
-        Page<PlayerSoccer> soccerPage= playerSoccerService.getAll(pageable,searchName,dateStart,dateEnd);
-        model.addAttribute("searchName",searchName);
-        model.addAttribute("size",size);
-        model.addAttribute("page",page);
-        model.addAttribute("soccerPage",soccerPage);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("player_name").ascending().and(Sort.by("player_birth").ascending()));
+        Page<PlayerSoccer> soccerPage = playerSoccerService.getAll(pageable, searchName, dateStart, dateEnd);
+        model.addAttribute("searchName", searchName);
+        model.addAttribute("size", size);
+        model.addAttribute("page", page);
+        model.addAttribute("soccerPage", soccerPage);
+        model.addAttribute("dateStart", dateStart);
+        model.addAttribute("dateEnd", dateEnd);
+        if (likeDto != null) {
+            model.addAttribute("like", likeDto);
+        }
         return "/list";
     }
 
@@ -129,14 +143,28 @@ public class PlayerSoccerController {
     public String transitionStatusReady(@RequestParam int id, RedirectAttributes redirectAttributes) {
         PlayerSoccer playerSoccer = playerSoccerService.findById(id);
         playerSoccer.setStatus(true);
+        playerSoccerService.save(playerSoccer);
         return "redirect:/soccer/list";
     }
 
     @GetMapping("/un-ready")
     public String transitionStatusReserve(@RequestParam int id, RedirectAttributes redirectAttributes) {
-        PlayerSoccer playerSoccer=playerSoccerService.findById(id);
+        PlayerSoccer playerSoccer = playerSoccerService.findById(id);
         playerSoccer.setStatus(false);
+        playerSoccerService.save(playerSoccer);
         return "redirect:/soccer/list";
+    }
+
+    @GetMapping("/like/{id}")
+    public String likePlayer(@PathVariable int id,
+                             @SessionAttribute(value = "like") LikeDto likeDto, RedirectAttributes redirectAttributes) {
+        PlayerSoccer playerSoccer = playerSoccerService.findById(id);
+        if (playerSoccer != null) {
+            PlayerSoccerDto playerSoccerDto = new PlayerSoccerDto();
+            BeanUtils.copyProperties(playerSoccer, playerSoccerDto);
+            likeDto.addPlayerLike(playerSoccerDto);
+        }
+        return "redirect:/like";
     }
 
 

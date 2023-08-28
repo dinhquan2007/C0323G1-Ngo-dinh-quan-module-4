@@ -69,6 +69,15 @@
       <input class="color-input-field"  type="text" th:field="*{image}">
       </td>
     </tr>
+    <tr>
+      <th>Trạng Thái</th>
+      <td>
+        <select th:field="*{status}">
+          <option value="true">Ra sân</option>
+          <option value="true">Dự bị</option>
+        </select>
+      </td>
+    </tr>
   </table>
   <button type="submit" class="btn btn-primary">Thêm mới</button>
 </form>

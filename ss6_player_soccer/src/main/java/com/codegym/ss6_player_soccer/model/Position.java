@@ -1,5 +1,7 @@
 package com.codegym.ss6_player_soccer.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @JsonBackReference
     @OneToMany(mappedBy = "position")
     private Set<PlayerSoccer> playerSoccerSet;
 

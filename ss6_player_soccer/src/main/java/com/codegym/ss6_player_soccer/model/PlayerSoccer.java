@@ -25,7 +25,7 @@ public class PlayerSoccer {
     @ManyToOne
     @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Position position;
-    @Column(name = "player_path_img")
+    @Column(name = "player_path_img",columnDefinition = "text")
     private String image;
     @ManyToOne
     @JoinColumn(name = "team_id",referencedColumnName = "id")

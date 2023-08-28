@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class PlayerSoccerService implements IPlayerSoccerService {
@@ -32,5 +33,10 @@ public class PlayerSoccerService implements IPlayerSoccerService {
     @Override
     public void save(PlayerSoccer playerSoccer) {
         playerSoccerRepository.save(playerSoccer);
+    }
+
+    @Override
+    public List<PlayerSoccer> getAllPlayer() {
+        return playerSoccerRepository.findAll();
     }
 }

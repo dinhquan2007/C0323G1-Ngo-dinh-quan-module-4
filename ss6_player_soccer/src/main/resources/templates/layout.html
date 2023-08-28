@@ -3,19 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <style th:fragment="style-header">
+        .navbar {
+            background-color: #20457c;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-brand img {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+        }
+        .footer {
+            background-color: #20457c;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 <body>
 <header th:fragment="header">
-    <h1>
-        Chương trình quản lý cầu thủ
-    </h1>
-
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt41231bc5b1f78bc5/637a31a4e4a1d613bfdda206/Logo_Fifa_.jpg?auto=webp&format=pjpg&width=3840&quality=60" alt="FIFA Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Về FIFA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Đội hình chính</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/like">Yêu thích</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
-<footer th:fragment="footer">
-    <h2>
-        Liên hệ với chúng tôi để biết thêm chi tiết
-    </h2>
-
+<footer class="footer" th:fragment="footer">
+        <div class="container text-center">
+            <p>&copy; 2023 FIFA. All rights reserved.</p>
+        </div>
 </footer>
 </body>
 </html>

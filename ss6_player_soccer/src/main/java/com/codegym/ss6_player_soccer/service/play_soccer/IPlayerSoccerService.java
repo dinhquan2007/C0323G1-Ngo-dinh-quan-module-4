@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.sql.Date;
+import java.util.List;
 
 
 public interface IPlayerSoccerService {
@@ -16,4 +17,6 @@ public interface IPlayerSoccerService {
     void remove(int id);
 
     void save(PlayerSoccer playerSoccer);
+
+    List<PlayerSoccer> getAllPlayer();
 }

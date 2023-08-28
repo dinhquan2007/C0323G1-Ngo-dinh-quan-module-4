@@ -25,12 +25,13 @@ public class PlayerSoccerDto implements Validator {
     public PlayerSoccerDto() {
     }
 
-    public PlayerSoccerDto(int id, String code, String name, Date birth, int experience, Position position, Team team, String image) {
+    public PlayerSoccerDto(int id, String code, String name, Date birth, int experience, boolean status, Position position, Team team, String image) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.birth = birth;
         this.experience = experience;
+        this.status = status;
         this.position = position;
         this.team = team;
         this.image = image;
@@ -78,6 +79,14 @@ public class PlayerSoccerDto implements Validator {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public void setName(String name) {
