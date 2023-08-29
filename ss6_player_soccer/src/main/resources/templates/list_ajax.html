@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="code.jquery.com_jquery-3.7.1.min.js"></script>
+
+</head>
+<body>
+<h1>Danh sách cầu thủ</h1>
+<h2>thêm mới</h2>
+<div>mã</div>
+<input type="text" id="code">
+<div>Tên</div>
+<input type="text" id="name">
+<div>ngày sinh</div>
+<input type="date" id="birth">
+<div>vị trí</div>
+<select id="position">
+    <option value="1">trung vệ</option>
+    <option value="2">hậu vệ</option>
+    <option value="3">tiền đạo</option>
+    <option value="4">thủ môn</option>
+    <option value="5">tiền vệ</option>
+</select>
+<div>đội tuyển</div>
+<select id="team">
+    <option value="1">argentina</option>
+    <option value="2">germany</option>
+    <option value="3">manchester</option>
+    <option value="3">livepool</option>
+</select>
+<button id="btn-add">Thêm</button>
+<table border="1px">
+    <tr>
+        <th>STT</th>
+        <th>Mã</th>
+        <th>Tên</th>
+        <th>Ngày sinh</th>
+        <th>vị trí</th>
+        <th>Đội tuyển</th>
+    </tr>
+    <tbody id="content">
+
+    </tbody>
+</table>
+<script>
+    display()
+
+    function display() {
+        let content = "";
+        $.ajax({
+            contentType: "application/json",
+            method: "Get",
+            dataType: "json",
+            url: "http://localhost:8080/api/list",
+            success: function (data) {
+                console.log(data)
+                for (let i = 0; i < data.length; i++) {
+                    content += `<tr>
+                                <td>${i + 1}</td>
+                                <td>${data[i].code}</td>
+                                <td>${data[i].name}</td>
+                                <td>${data[i].birth}</td>
+                                <td>${data[i].position.name}</td>
+                                <td>${data[i].team.name}</td>
+                            </tr>`
+                }
+                $("#content").html(content);
+            }
+        })
+    }
+
+    $(#btn - add).click(function () {
+        let code = $("code").val()
+        let name = $("name").val()
+        let birth = $("birth").val()
+        let position = $("position").val()
+        let team = $("team").val()
+       let playerSoccer={
+            code:code,
+           name:name,
+           position:{
+                id:position
+           },
+           team:{
+                id:team
+           }
+       }
+       $.ajax({
+           contentType: "application/json",
+           method: "Post",
+           dataType: "json",
+           url: "http://localhost:8080/api/list",
+           complete:function (){
+               display();
+           }
+       })
+    })
+</script>
+</body>
+</html>
